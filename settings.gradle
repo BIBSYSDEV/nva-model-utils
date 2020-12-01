@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'nva-model-utils'
-include 'dynamodb-converter'
+include 'datapipelineexport-reader'
