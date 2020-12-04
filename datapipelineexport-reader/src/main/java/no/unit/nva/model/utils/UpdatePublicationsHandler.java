@@ -7,17 +7,22 @@ import nva.commons.handlers.RequestInfo;
 import nva.commons.handlers.RestRequestHandler;
 import nva.commons.utils.Environment;
 import nva.commons.utils.JacocoGenerated;
+import org.apache.http.HttpStatus;
 import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
+import java.time.Instant;
 
-public class UpdatePersonIdentifiersHandler extends
-        ApiGatewayHandler<UpdatePersonIdentifierRequest, UpdatePersonIdentifierResponse> {
+import static java.util.Objects.nonNull;
+import static nva.commons.utils.StringUtils.isEmpty;
 
-    public static final String MISSING_REQUIRED_PARAMERTERS = "Missing required paramerters";
+public class UpdatePublicationsHandler extends
+        ApiGatewayHandler<ReadFromS3BucketRequest, UpdatePublicationsResponse> {
+
+    public static final String MISSING_REQUIRED_PARAMETER = "Missing required parameter";
+    public static final String JOB_STARTED_MESSAGE = "Job started";
 
     @JacocoGenerated
-    public UpdatePersonIdentifiersHandler() {
+    public UpdatePublicationsHandler() {
         this(new Environment());
     }
 
@@ -25,10 +30,10 @@ public class UpdatePersonIdentifiersHandler extends
      * Creates UpdatePersonIdentifiersHandler with the given environment.
      * @param environment containeg settings for function
      */
-    public UpdatePersonIdentifiersHandler(Environment environment) {
-        super(UpdatePersonIdentifierRequest.class,
+    public UpdatePublicationsHandler(Environment environment) {
+        super(ReadFromS3BucketRequest.class,
                 environment,
-                LoggerFactory.getLogger(UpdatePersonIdentifiersHandler.class));
+                LoggerFactory.getLogger(UpdatePublicationsHandler.class));
     }
 
     /**
@@ -43,13 +48,20 @@ public class UpdatePersonIdentifiersHandler extends
      *                             method {@link RestRequestHandler#getFailureStatusCode}
      */
     @Override
-    protected UpdatePersonIdentifierResponse processInput(UpdatePersonIdentifierRequest input,
-                                                          RequestInfo requestInfo, Context context)
+    protected UpdatePublicationsResponse processInput(ReadFromS3BucketRequest input,
+                                                      RequestInfo requestInfo, Context context)
             throws ApiGatewayException {
-        if (Objects.isNull(input)) {
-            throw new InputException(MISSING_REQUIRED_PARAMERTERS);
+        if (!parametersIsValid(input)) {
+            return new UpdatePublicationsResponse(MISSING_REQUIRED_PARAMETER,
+                    input,
+                    HttpStatus.SC_BAD_REQUEST,
+                    Instant.now());
         }
-        return null;
+        return new UpdatePublicationsResponse(JOB_STARTED_MESSAGE, input, HttpStatus.SC_ACCEPTED, Instant.now());
+    }
+
+    private boolean parametersIsValid(ReadFromS3BucketRequest input) {
+        return nonNull(input) && !isEmpty(input.getS3bucket()) && !isEmpty(input.getS3folderkey());
     }
 
     /**
@@ -60,7 +72,7 @@ public class UpdatePersonIdentifiersHandler extends
      * @return the success status code.
      */
     @Override
-    protected Integer getSuccessStatusCode(UpdatePersonIdentifierRequest input, UpdatePersonIdentifierResponse output) {
+    protected Integer getSuccessStatusCode(ReadFromS3BucketRequest input, UpdatePublicationsResponse output) {
         return output.getStatusCode();
     }
 }

@@ -1,4 +1,4 @@
-package no.unit.nva.model.utils;
+package no.unit.nva.model.utils.exceptions;
 
 import nva.commons.exceptions.ApiGatewayException;
 import org.apache.http.HttpStatus;

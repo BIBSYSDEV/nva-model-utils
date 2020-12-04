@@ -1,5 +1,6 @@
-package no.unit.nva.model.utils;
+package no.unit.nva.model.utils.exceptions;
 
+import no.unit.nva.model.utils.exceptions.InputException;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 

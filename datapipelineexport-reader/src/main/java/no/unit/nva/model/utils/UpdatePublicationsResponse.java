@@ -5,10 +5,10 @@ import nva.commons.utils.JacocoGenerated;
 import java.time.Instant;
 import java.util.Objects;
 
-public class UpdatePersonIdentifierResponse {
+public class UpdatePublicationsResponse {
 
     private final String message;
-    private final UpdatePersonIdentifierRequest request;
+    private final ReadFromS3BucketRequest request;
     private final Integer statusCode;
     private final Instant timestamp;
 
@@ -19,10 +19,10 @@ public class UpdatePersonIdentifierResponse {
      * @param statusCode was the import started
      * @param timestamp when the request was handled
      */
-    public UpdatePersonIdentifierResponse(String message,
-                                          UpdatePersonIdentifierRequest request,
-                                          Integer statusCode,
-                                          Instant timestamp) {
+    public UpdatePublicationsResponse(String message,
+                                      ReadFromS3BucketRequest request,
+                                      Integer statusCode,
+                                      Instant timestamp) {
         this.message = message;
         this.request = request;
         this.statusCode = statusCode;
@@ -37,7 +37,7 @@ public class UpdatePersonIdentifierResponse {
         return statusCode;
     }
 
-    public UpdatePersonIdentifierRequest getRequest() {
+    public ReadFromS3BucketRequest getRequest() {
         return request;
     }
 
@@ -54,7 +54,7 @@ public class UpdatePersonIdentifierResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UpdatePersonIdentifierResponse that = (UpdatePersonIdentifierResponse) o;
+        UpdatePublicationsResponse that = (UpdatePublicationsResponse) o;
         return Objects.equals(getMessage(), that.getMessage())
                 && Objects.equals(getRequest(), that.getRequest())
                 && Objects.equals(getTimestamp(), that.getTimestamp())
